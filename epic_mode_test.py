@@ -33,19 +33,22 @@ class TestVector2d():
         [a b]  + [c d]  = [a+c b+d]
         Matrix + Matrix = Matrix
         """
-        assert Vector2d.vector_add(Vector2d, v, w) == [1, 5, 4]
-        assert Vector2d.vector_add(Vector2d, u, y) == [11, 21, 31]
-        assert Vector2d.vector_add(Vector2d, u, z) == u
+        thing = Vector2d()
+        assert thing.vector_add(v, w) == [1, 5, 4]
+        assert thing.vector_add(u, y) == [11, 21, 31]
+        assert thing.vector_add(u, z) == u
 
 
     def test_vector_add_is_commutative(self):
-        assert Vector2d.vector_add(Vector2d, w, y) == Vector2d.vector_add(Vector2d, y, w)
+        thing = Vector2d()
+        assert thing.vector_add(w, y) == thing.vector_add(y, w)
 
 
     @raises(ShapeError)
     def test_vector_add_checks_shapes(self):
         """Shape rule: the vectors must be the same size."""
-        Vector2d.vector_add(Vector2d, m, v)
+        thing = Vector2d()
+        thing.vector_add(m, v)
 
 
     def test_vector_sub(self):

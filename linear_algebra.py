@@ -99,5 +99,4 @@ def matrix_matrix_multiply(matrix_a, matrix_b):
         raise ShapeError(Exception)
 
     new_matrix = [[dot(row, matrix_col(matrix_b, column)) for column in range(matrix_b_col)] for row in matrix_a]
-    print(new_matrix)
     return new_matrix

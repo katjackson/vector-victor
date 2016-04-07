@@ -14,7 +14,7 @@ class Vector2d:
 
 
     def vector_add(self, vector_a, vector_b):
-        if self.shape(self, vector_a) != self.shape(self,vector_b):
+        if self.shape(vector_a) != self.shape(vector_b):
             raise ShapeError(Exception)
 
         return [a + b for a, b in zip(vector_a, vector_b)]
