@@ -3,15 +3,6 @@ import math
 class ShapeError(Exception):
     pass
 
-m = [3, 4]
-n = [5, 0]
-
-v = [1, 3, 0]
-w = [0, 2, 4]
-u = [1, 1, 1]
-y = [10, 20, 30]
-z = [0, 0, 0]
-
 
 def shape(num_set):
     rows = len(num_set)
@@ -60,6 +51,53 @@ def vector_mean(*args):
     list_of_args = [arg for arg in args]
     return vector_multiply(vector_sum(*args), (1 / len(list_of_args)))
 
+
 def magnitude(vector):
     vector_squared_scalar = dot(vector, vector)
     return math.sqrt(vector_squared_scalar)
+
+
+def matrix_row(matrix, row):
+    return matrix[row]
+
+
+def matrix_col(matrix, col):
+    return [x[col] for x in matrix]
+
+
+def matrix_add(matrix_a, matrix_b):
+    if shape(matrix_a) != shape(matrix_b):
+        raise ShapeError(Exception)
+
+    return [vector_add(a, b) for a, b in zip(matrix_a, matrix_b)]
+
+
+def matrix_sub(matrix_a, matrix_b):
+    if shape(matrix_a) != shape(matrix_b):
+        raise ShapeError(Exception)
+
+    return [vector_sub(a, b) for a, b in zip(matrix_a, matrix_b)]
+
+
+def matrix_scalar_multiply(matrix, scalar):
+    return [vector_multiply(vector, scalar) for vector in matrix]
+
+
+def matrix_vector_multiply(matrix, vector):
+    matrix_rows, matrix_columns = shape(matrix)
+    vector_rows = shape(vector)
+    if vector_rows != (matrix_columns,):
+        raise ShapeError(Exception)
+
+    return [dot(row, vector) for row in matrix]
+
+
+def matrix_matrix_multiply(matrix_a, matrix_b):
+    matrix_a_rows, matrix_a_col = shape(matrix_a)
+    matrix_b_rows, matrix_b_col = shape(matrix_b)
+    if matrix_a_col != matrix_b_rows:
+        raise ShapeError(Exception)
+
+    new_matrix = [[dot(row, matrix_col(matrix_b, column)) for column in range(matrix_b_col)] for row in matrix_a]
+    print(new_matrix)
+    return new_matrix
